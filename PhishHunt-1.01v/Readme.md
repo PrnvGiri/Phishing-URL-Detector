@@ -1,6 +1,6 @@
 # Phishing Detection Website using AI/ML
 
-![PhishHunt](PhishHunt-1.01v/mainpage.png)
+![PhishHunt](https://drive.google.com/file/d/1vU5Xil6zfSjztICcdCiSvY-Gos0kxj2v/view?usp=sharing)
 
 ## Introduction
 
