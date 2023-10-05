@@ -1,0 +1,196 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.brand-name {
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 2.5rem;
+}
+.header {
+    padding-bottom: 4rem;
+}
+.links {
+    font-size: 1.2rem;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+#title {
+    background-color: black;
+}
+.container-fluid {
+    padding: 3% 15%;
+}
+.moto {
+    color: white;
+}
+h1{
+    font-size: 3rem;
+    line-height: 1.5;
+}
+.phone-image {
+    width: 60%;
+    transform: rotate(25deg);
+}
+
+#features {
+    text-align: center;
+    padding: 7% 5%;
+}
+.feature-item {
+    margin: auto;
+}
+
+.feature-block {
+    padding: 8rem  5rem ;
+    margin: auto;
+}
+.fa-sticker {
+    color: #ef8172;
+    font-size: 3rem;
+    padding-bottom: 1.5rem;
+}
+.fa-sticker:hover {
+    color: #ff4c68;
+}
+.feature-heading {
+    font-family: 'Montserrat-bold' sans-serif;
+    font-size: 1.5rem;
+}
+
+.feature-body {
+    color: #8f8f8f;
+}
+
+.carousel-item {
+    padding: 2% 8%;
+}
+
+
+  
+@media (max-width: 768px) {
+    .phone-image {
+        transform: rotate(0deg);
+        padding-top: 5%;
+    }
+    .phone-image-container {
+        text-align: center;
+    }
+}
+
+
+
+#footer {
+    padding: 1% 15%;
+    text-align: center;
+    font-size:  1.5rem;
+}
+.cpy-right {
+    padding-top: 2%;
+}
+.fa-footer-icon {
+    color: #000000;
+    margin: 0 1%;
+}
+
+#verification-form {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+.verification-result {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.content {
+    padding: 30px;
+    background-color: black;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    text-align: center;
+    flex: 1; 
+     margin-right: 200px;
+     margin-left: 200px;
+     margin-top: 30px;
+}
+#main {
+    background-color: #000000;
+    padding: 7% 0;
+}
+
+small{
+    font-size: 15px;
+    color: white;
+}
+
+.fa-icon {
+    font-size: 5rem;
+}
+.fa-icon.fa-beat {
+    position: absolute;
+    right: 100px;
+    font-size: 3rem;
+    color: white;
+}
+.fa-icon.fa-bounce {
+    position: absolute;
+    color: wheat;
+    left: 100px;
+}
+.form-text {
+    font-size: 25px;
+    color: white;
+
+}
+b{
+            background-color: black;
+            border: 5px solid #ccc;
+            border-radius: 10px;  
+            border-color: pink;
+            color: white;
+           
+        }
+        a{
+ text-decoration: none;
+        }
+        i{
+            background-color: gray;
+            border: 5px solid #ccc;
+            border-radius: 10px;  
+            border-color: pink;
+            color: white;
+           
+        }

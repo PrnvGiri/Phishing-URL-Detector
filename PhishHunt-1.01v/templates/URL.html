@@ -1,0 +1,152 @@
+<html>
+
+<head>
+    <title>Phishing URL Verification</title>
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    a {
+        text-decoration: none;
+        font-size: 23px;
+        color: black;
+
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: black;
+        text-align: center;
+    }
+
+    header {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 1rem 0;
+        width: 100%;
+        opacity: 3;
+        /* Start with opacity set to 0 */
+        animation: fadeIn 3s ease-in-out forwards;
+        /* Apply fade-in animation */
+        animation: glowing 5000ms infinite;
+        font-weight: 250%;
+
+    }
+
+    @keyframes glowing {
+        50% {
+            background-color: orange;
+        }
+
+        50% {
+            background-color: grey;
+        }
+    }
+
+    h1 {
+        margin: 9;
+    }
+
+    .verification-form {
+        max-width: 600px;
+        margin: 20px auto;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    button {
+        background-color: #333;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #555;
+    }
+
+    .verification-result {
+        margin-top: 20px;
+        font-weight: bold;
+    }
+
+    p {
+        font-size: 25px;
+        color: white;
+
+    }
+
+    .content {
+        padding: 30px;
+        background-color: black;
+        border: 1px solid #ccc;
+        border-radius: 30px;
+        text-align: center;
+        flex: 1;
+        margin-right: 200px;
+        margin-left: 200px;
+        margin-top: 30px;
+    }
+
+    small {
+        font-size: 15px;
+    }
+</style>
+</head>
+
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" align="left" width="200" height="84s"
+            style="margin-top:-15px; margin-bottom: -14px; max-width: 300;">
+        <h1>Phishing URL Verification</h1>
+
+    </header>
+    <section class="content">
+        <p>
+            Welcome to phishing
+            URL Verification.
+            Start your set up by
+            entering a domain
+            you like to monitor.
+        </p>
+
+        <p>
+            <small>Enter your brand domain to generate up to 300
+                typosquat variations and we help you Scan up
+                to 100 to discover potential scams or phish
+                URLs you may not have considered.</small>
+        </p>
+
+        <form id="verification-form" action="/verify" method="POST">
+            <label for="phishing_url">Enter URL to Verify:</label>
+            <input type="text" id="phishing_url" name="phishing_url" placeholder="Enter the URL to verify" required>
+            <button type="submit">Verify URL</button>
+        </form>
+        <div class="verification-result" id="verification_result"></div>
+
+
+
+
+
+</body> 
+
+</html>

@@ -1,0 +1,113 @@
+<html >
+<head>
+  
+    <title>Report Phishing</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            text-align: center;
+        }
+
+        header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    width: 100%;
+    opacity: 3; /* Start with opacity set to 0 */
+    animation: fadeIn 3s ease-in-out forwards; /* Apply fade-in animation */
+       animation: glowing 5000ms infinite;
+       font-weight: 250%;
+     
+}
+
+     @keyframes glowing {
+50% {
+   background-color: orange;
+ }
+ 50% {
+   background-color: grey;
+ }
+}
+
+        h1 {
+            margin: 10;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 20px auto;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+         footer {
+            text-align: center;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            width: 100%; 
+            margin-top: 318px;
+        }
+        a{
+            text-decoration: none;
+            color: whitesmoke;
+            font-size: 20;
+        }
+    </style>
+</head>
+<body>
+    <header>
+         <img src="LOGO.png" align="left" width="200" height="85" style="margin-top:-15px; margin-bottom: -14px; max-width: 300;" >
+        <h1>Report Phishing</h1>
+    </header>
+    <form>
+        <label for="phishing_url">Phishing URL:</label>
+        <input type="text" id="phishing_url" name="phishing_url" placeholder="Enter the suspicious URL" required>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" placeholder="Describe why you suspect this is a phishing attempt" required></textarea>
+
+        <button type="submit"><a href="#"> Submit Report</a></button>
+    </form>
+     <footer>
+        <p>&copy; TECH TITANS</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create an Account</title>
+<style>
+*{  margin: 0;  padding: 0;  box-sizing: border-box;  list-style: none;  font-family: 'Montserrat', sans-serif;}
+.wrapper{  justify-content: center;  align-items: center;  min-height: 100vh;  display: flex;}
+.registration_form{  border-radius: 5px;  width: 400px;  background: white;  padding: 25px;}
+.registration_form .title{  color: white;  background:grey;  letter-spacing: 2px;  font-weight: 700;  text-align: center;  font-size: 25px;  text-transform: uppercase;  margin-top: -25px;  margin-left:-25px;  margin-right:-25px;}
+.form_wrap{  margin-top: 35px;}
+.form_wrap .input_wrap{  margin-bottom: 15px;  }
+.form_wrap .input_wrap:last-child{  margin-bottom: 0;}
+.form_wrap .input_wrap label{  margin-bottom: 3px;  color: #1a1a1f;  display: block;}
+.form_wrap .input_grp{  display: flex;  justify-content: space-between;}
+.form_wrap .input_grp  input[type="text"]{  width: 165px;}
+.form_wrap  input[type="text"]{  width: 100%;  padding: 10px;  outline: none;  border-radius: 3px;  border: 1.3px solid #9597a6;}
+.form_wrap  input[type="text"]:focus{  border-color: #063abd;}
+.form_wrap ul{  padding: 8px 10px;  border-radius: 20px;  display: flex;  justify-content: center;  border:1px solid rgb(115, 185, 235);  width:70%;  background: rgb(206, 238, 242);  margin-left: 15%;}
+/* Submit Button */.form_wrap .submit_btn{  font-size:17px;  border-radius: 3px;  text-transform: uppercase;  letter-spacing: 2px;  cursor: pointer;  width: 100%;  background: grey;  padding: 10px;  border: 0;  color:white;}
+/* Button Hover effect */.form_wrap .submit_btn:hover{  background: #051c94;}
+
+a{text-decoration: none;
+
+}
+</style>
+  
+</head>
+<body bgcolor="black"><table width="100%" height="70" bgcolor="black">
+
+<div class="wrapper"> 
+<div class="registration_form">
+<!-- Title -->  
+<div class="title"> Create Account   </div>
+<!-- Form --> <form action="p">  <div class="form_wrap">  
+ <div class="input_grp">
+     
+ <div class="input_wrap">   <label for="name">First Name</label>   <input type="text" id="fullname" name="fullname" required>   
+ </div>
+ <div class="input_wrap">  <label for="telephone">Last Name</label>   <input type="text" id="telephone" name="telephone" required>  
+ </div>  </div>
+
+ <div class="input_wrap">  <label for="country">Email</label>  <input type="email" id="email" name="email" required> </div>
+
+
+<div class="password">  <label for="country">Password  <br></label>  <input type="password" id="password" name="password" required>
+ </div>
+
+<br><br>
+ 
+<div class="input_wrap"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        <a href="succesfull.html" class="submit_btn" target="_blank">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp SIGN IN &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+</body>
+</html> 

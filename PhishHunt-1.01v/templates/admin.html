@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .admin-panel {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-nav {
+            background-color: #444;
+            list-style-type: none;
+            text-align: center;
+        }
+
+        .admin-nav li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        .admin-nav li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .admin-content {
+            padding: 20px;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .admin-table th,
+        .admin-table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .admin-table th {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .admin-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .admin-table tr:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Admin Panel</h1>
+        <img src="LOGO.png" align="left" width="150" height="50">
+    </header>
+    <div class="admin-panel">
+        <ul class="admin-nav">
+            <li><a href="#reports">Manage Reports</a></li>
+            <li><a href="#verify">Verify URLs</a></li>
+            <li><a href="#communicate">Communicate with Users</a></li>
+        </ul>
+        <div class="admin-content" id="reports">
+            <h2>Manage Reports</h2>
+            <!-- Add report management content here -->
+        </div>
+        <div class="admin-content" id="verify">
+            <h2>Verify URLs</h2>
+            <!-- Add URL verification content here -->
+        </div>
+        <div class="admin-content" id="communicate">
+            <h2>Communicate with Users</h2>
+            <!-- Add user communication content here -->
+        </div>
+    </div>
+</body>
+</html>

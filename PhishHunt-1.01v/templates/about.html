@@ -1,0 +1,170 @@
+
+<html >
+<head>
+   
+    <title>Contact Us</title>
+    <style >
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+h1 {
+    margin: 8;
+}
+
+.contact-form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.contact-info {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#live-chat {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+footer {
+            text-align: center;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            width: 100%; 
+            height: 30px;
+            
+        }
+/* About section styling */
+.about-section {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center; /* Center the content within the section */
+}
+
+.about-section h2 {
+    font-size: 24px; /* Increase font size for the section heading */
+    margin-bottom: 15px;
+}
+
+.about-section p {
+    font-size: 16px;
+    line-height: 1.5; /* Adjust line height for readability */
+    color: #333; /* Use a dark text color for better contrast */
+}
+
+.about-section per {
+    font-style: italic; /* Apply italic style to the <per> tag content */
+}
+
+</style>
+</head>
+<body>
+    <header>
+        <img src="LOGO.png" align="left" width="200" height="85" style="margin-top:-15px; margin-bottom: -14px; max-width: 300;" >
+
+        <h1>Contact Us</h1>
+    </header>
+    <div class="about-section">
+        <h2>About Us</h2>
+        <per><p>Welcome to Phishing Detection, where we are dedicated to making the internet a safer place for everyone. Our mission is to provide free and effective phishing and fraud site detection services to the community.</p>
+
+        <p>Our technology is designed to help you identify and report phishing attempts, protecting you and others from online threats. Whether you're a security enthusiast or simply looking to verify a suspicious link, we've got you covered.</p></per>
+    </div>
+    <section class="contact-form">
+        <h2>Contact Form</h2>
+        <form id="contact-form">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+    
+    <section class="contact-info">
+        <h2>Contact Information</h2>
+        <p>Email: <a href="mailto:support@yourdomain.com">support@phishhunt.com</a></p>
+        <p>Phone: +91 (555) 123-4567</p>
+        <p>Social Media: <a href=" https://www.instagram.com/u_____neza/" target="_blank">instagram</a></p>
+
+    </section>
+
+    <script >
+        document.addEventListener('DOMContentLoaded', function () {
+    const liveChatLink = document.getElementById('live-chat');
+    liveChatLink.addEventListener('click', function (e) {
+        e.preventDefault();
+        // Implement your live chat functionality here
+        alert('Live chat functionality will be implemented here.');
+    });
+});
+
+    </script>
+    <footer>
+        <p>&copy; TECH TITANS</p>
+    </footer>
+</body>
+</html>

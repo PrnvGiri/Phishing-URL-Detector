@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result Page</title>
+    <style>
+
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+
+   
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            margin-top:  50px;
+            text-align: center;
+        }
+         .container1 {
+            
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            margin-top:  50px;
+            text-align: center;
+        }
+
+
+        h1{
+            font-family:bell-MT;
+            font-size: 30PX;
+            margin-top: 40px;
+            text-align: center;
+            margin-left: 100px;
+        }
+
+        p {
+            font-size: 20px;
+            color: #666;
+        }
+
+        #result {
+            font-size: 24px;
+            color: red;
+            font-weight: bold;
+            margin-top: 20px;
+            font-family: algerian ;
+        }
+         header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    width: 100%;
+    opacity: 3; /* Start with opacity set to 0 */
+    animation: fadeIn 3s ease-in-out forwards; /* Apply fade-in animation */
+       animation: glowing 5000ms infinite;
+       font-weight: 250%;
+     
+}
+
+     @keyframes glowing {
+1% {
+   background-color: black;
+ }
+ 50% {
+   background-color: grey;
+ }
+}
+ footer {
+            text-align: center;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            width: 100%; 
+            margin-top: 100px;
+            height: 70px;
+        }
+
+    </style>
+</head>
+
+<body>
+     <header>
+      <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" align="left" width="200" height="110" style="margin-top:-15px; max-width: 300;">
+        <h1>RESULTS</h1>
+    </header>
+    
+    <div class="container">
+        
+        <p>This is the result of your operation:</p>
+
+        <!-- Replace this with your actual result -->
+        <p id="result">Result - {{result}} </p>
+    </div>
+
+    <div class="container1">
+
+<h1><b><u>Verification Result</u></b></h1><br>
+    <p><b>URL:</b> {{ url }}</p><br>
+    <p><b>IP Address:</b> {{ ip_address }}</p><br>
+    <p><b>Creation Date:</b> {{ creation_date }}</p><br>
+
+     </div>
+    <footer>
+        <p>&copy; TECH TITANS</p>
+    </footer>
+</body>
+
+</html>
