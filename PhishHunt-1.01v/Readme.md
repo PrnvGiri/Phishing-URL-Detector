@@ -1,6 +1,6 @@
 # Phishing Detection Website using AI/ML
 
-![Phishing Detection]([https://yourwebsite.com/path/to/website/screenshot.png](https://github.com/PrnvGiri/Phishing-URL-Detector/blob/main/PhishHunt-1.01v/mainpage.png))
+![Phishing Detection](https://github.com/PrnvGiri/Phishing-URL-Detector/blob/main/PhishHunt-1.01v/mainpage.png)
 
 ## Introduction
 
