@@ -17,6 +17,8 @@ from urllib.parse import urlparse
 import dns.resolver
 import requests
 from bs4 import BeautifulSoup
+import difflib
+from whitelist import TOP_DOMAINS, SENSITIVE_ROOTS
 
 app = Flask(__name__)
 
@@ -136,6 +138,45 @@ def predict():
         
         if not url.startswith(('http://', 'https://')): url = 'http://' + url
         print(f" [INFO] Analyzing: {url}")
+        
+        # --- PHASE 0: ENTERPRISE VERIFICATION (Whitelist & Typosquatting) ---
+        domain = urlparse(url).netloc.lower()
+        if domain.startswith('www.'): domain = domain[4:]
+        
+        # 1. Whitelist Check (Instant Safe)
+        if domain in TOP_DOMAINS:
+            print(f" [INFO] Whitelisted Domain: {domain}")
+            return jsonify({
+                'url': url, 'result': 'Legitimate', 'probability': 0.01,
+                'features': {}, 'reasons': ["Verified Safe Domain (Whitelist)"],
+                'domain_info': {}, 'dns_info': {}, 'site_data': {}
+            })
+            
+        # 2. Typosquatting Check (Fuzzy match against whitelist)
+        # Check if domain looks like a top domain (e.g. 'faceb00k.com' vs 'facebook.com')
+        # We start with a blank checks list
+        typo_reasons = []
+        is_typosquat = False
+        
+        # Only check against domains that are not sensitive logic roots (like hosting providers)
+        if domain not in SENSITIVE_ROOTS:
+            for safe_domain in TOP_DOMAINS:
+                # If ratio > 0.85 (very similar) but not identical -> Impersonation
+                ratio = difflib.SequenceMatcher(None, domain, safe_domain).ratio()
+                if 0.80 < ratio < 1.0:
+                    # Double check it's not just a subdomain (e.g. mail.google.com)
+                    if not domain.endswith("." + safe_domain):
+                        is_typosquat = True
+                        typo_reasons.append(f"Impersonation attempt of {safe_domain} ({int(ratio*100)}% match)")
+                        break
+        
+        if is_typosquat:
+             print(f" [INFO] Typosquatting Detected: {domain}")
+             return jsonify({
+                'url': url, 'result': 'Phishing', 'probability': 0.99,
+                'features': {}, 'reasons': typo_reasons + ["Detected via Typosquatting Engine"],
+                'domain_info': {}, 'dns_info': {}, 'site_data': {}
+            })
 
         # 1. Feature Extraction (Fast)
         extractor = FeatureExtractor()
