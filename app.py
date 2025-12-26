@@ -14,8 +14,10 @@ from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 
-MODEL_PATH = r'c:\Aryan\PhishingURLDetector\model.h5'
-SCALER_PATH = r'c:\Aryan\PhishingURLDetector\scaler.pkl'
+# Load model and scaler
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, 'model.h5')
+SCALER_PATH = os.path.join(BASE_DIR, 'scaler.pkl')
 
 print(f"Loading model from {MODEL_PATH}...")
 try:
