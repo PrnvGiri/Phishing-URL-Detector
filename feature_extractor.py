@@ -21,8 +21,7 @@ class FeatureExtractor:
     def __init__(self):
         self.suspicious_keywords = [
             'login', 'secure', 'account', 'update', 'verify', 'signin', 'banking', 
-            'confirm', 'service', 'paypal', 'ebay', 'amazon', 'apple', 'google', 
-            'microsoft', 'facebook', 'netflix', 'wallet', 'crypto', 'payment'
+            'confirm', 'service', 'wallet', 'crypto', 'payment'
         ]
         self.shortening_services = r"bit\.ly|goo\.gl|shorte\.st|go2l\.ink|x\.co|ow\.ly|t\.co|tinyurl|tr\.im|is\.gd|cli\.gs|" \
                                    r"yfrog\.com|migre\.me|ff\.im|tiny\.cc|url4\.eu|twit\.ac|su\.pr|twurl\.nl|snipurl\.com|" \
