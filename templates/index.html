@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhishNetra | Advanced Threat Intelligence</title>
+    <!-- Flowa UI CSS -->
+    <link rel="stylesheet" href="/static/style.css">
+    <!-- Font: Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="background-globes">
+        <div class="globe globe-1"></div>
+        <div class="globe globe-2"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="flowa-header">
+            <div class="logo-wrapper">
+                <i data-lucide="scan-eye" class="logo-icon"></i>
+                <h1>Phish<span class="gradient-text">Netra</span></h1>
+            </div>
+            <p class="tagline">Next-Gen AI Phishing Intelligence</p>
+        </header>
+
+        <main>
+            <!-- Search Bar -->
+            <div class="search-wrapper">
+                <div class="search-input-box">
+                    <i data-lucide="link" class="input-icon"></i>
+                    <input type="text" id="urlInput" placeholder="Analyze a specific URL..." autocomplete="off">
+                    <button id="analyzeBtn">
+                        <i data-lucide="search"></i>
+                        <span>Scan</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loading" class="loading-state hidden">
+                <div class="flowa-spinner"></div>
+                <p>Establishing neural connection & scraping metadata...</p>
+            </div>
+
+            <!-- Results Section -->
+            <div id="result" class="results-container hidden">
+
+                <!-- Verdict Banner -->
+                <div id="statusBanner" class="verdict-banner">
+                    <div class="verdict-content">
+                        <i id="verdictIcon" data-lucide="shield-check" class="verdict-icon"></i>
+                        <div class="verdict-text">
+                            <h2 id="resultTitle">Safe Destination</h2>
+                            <p id="resultDesc">No malicious vector patterns detected.</p>
+                        </div>
+                    </div>
+                    <div class="confidence-meter">
+                        <span class="conf-label">Confidence</span>
+                        <span id="probValue" class="conf-value">0%</span>
+                    </div>
+                </div>
+
+                <!-- Intelligence Grid -->
+                <!-- Summary Stats -->
+                <div class="intel-grid">
+
+                    <!-- Domain Intelligence (Whois) -->
+                    <div class="flowa-card domain-card">
+                        <div class="card-header">
+                            <i data-lucide="globe" class="icon-accent"></i>
+                            <h3>Domain Intelligence</h3>
+                        </div>
+                        <ul id="domainInfoList" class="info-list">
+                            <li>Loading info...</li>
+                        </ul>
+                    </div>
+
+                    <!-- Visual Analysis -->
+                    <div class="flowa-card chart-card">
+                        <div class="card-header">
+                            <i data-lucide="radar" class="icon-accent"></i>
+                            <h3>Visual Threat Vector</h3>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="riskChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Lexical / Heuristic -->
+                    <div class="flowa-card features-card">
+                        <div class="card-header">
+                            <i data-lucide="binary" class="icon-accent"></i>
+                            <h3>Lexical Fingerprint</h3>
+                        </div>
+                        <ul id="featuresList" class="info-list"></ul>
+                    </div>
+
+                </div>
+
+                <!-- Risk Flags -->
+                <div id="reasonsContainer" class="risk-flags hidden">
+                    <h3><i data-lucide="alert-triangle"></i> Detected Threats</h3>
+                    <ul id="reasonsList"></ul>
+                </div>
+
+                <!-- DEEP SCAN Accordion (New) -->
+                <div class="deep-scan-wrapper">
+                    <button class="accordion-btn" id="deepScanToggle">
+                        <div class="btn-content">
+                            <i data-lucide="layers"></i>
+                            <span>Deep Reconnaissance / Advanced Details</span>
+                        </div>
+                        <i data-lucide="chevron-down" class="chevron"></i>
+                    </button>
+
+                    <div class="accordion-content hidden" id="deepScanContent">
+                        <div class="deep-grid">
+                            <!-- DNS Records -->
+                            <div class="flowa-card">
+                                <div class="card-header">
+                                    <i data-lucide="server" class="icon-accent"></i>
+                                    <h3>DNS Records</h3>
+                                </div>
+                                <div class="code-block" id="dnsContainer">
+                                    <!-- Injected -->
+                                </div>
+                            </div>
+
+                            <!-- Scraped Content -->
+                            <div class="flowa-card">
+                                <div class="card-header">
+                                    <i data-lucide="file-code" class="icon-accent"></i>
+                                    <h3>Content Analysis</h3>
+                                </div>
+                                <ul id="siteDataList" class="info-list">
+                                    <!-- Injected -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="error" class="error-toast hidden"></div>
+        </main>
+
+        <footer class="flowa-footer">
+            <p>Powered by <strong>PhishNetra AI</strong> • <span id="year">2025</span></p>
+        </footer>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+
+</html>
