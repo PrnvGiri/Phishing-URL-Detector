@@ -26,20 +26,29 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, 'model.h5')
 SCALER_PATH = os.path.join(BASE_DIR, 'scaler.pkl')
 
-print(f"Loading resources from {BASE_DIR}...")
+# --- CONFIG ---
+# Load model and scaler
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, 'model.h5')
+SCALER_PATH = os.path.join(BASE_DIR, 'scaler.pkl')
 
 model = None
 scaler = None
 
-try:
-    if os.path.exists(MODEL_PATH) and os.path.exists(SCALER_PATH):
-        model = load_model(MODEL_PATH)
-        scaler = joblib.load(SCALER_PATH)
-        print(" [SUCCESS] Model and Scaler loaded.")
-    else:
-        print(f" [ERROR] Files not found: {MODEL_PATH}")
-except Exception as e:
-    print(f" [CRITICAL] Error loading model: {e}")
+def get_model_and_scaler():
+    global model, scaler
+    if model is None or scaler is None:
+        print(" [INFO] Lazy loading model & scaler...")
+        try:
+            if os.path.exists(MODEL_PATH) and os.path.exists(SCALER_PATH):
+                model = load_model(MODEL_PATH)
+                scaler = joblib.load(SCALER_PATH)
+                print(" [SUCCESS] Resources loaded.")
+            else:
+                print(f" [ERROR] Files missing at {BASE_DIR}")
+        except Exception as e:
+            print(f" [CRITICAL] Load failed: {e}")
+    return model, scaler
 
 # --- HELPER FUNCTIONS ---
 
@@ -105,14 +114,18 @@ def home():
 
 @app.route('/health')
 def health():
-    return jsonify({"status": "online", "model_loaded": model is not None}), 200
+    return jsonify({"status": "online", "message": "Service is running. Model loads on first request."}), 200
 
 @app.route('/predict', methods=['POST'])
 def predict():
     print(" [INFO] Received prediction request")
+    
+    # Lazy Load
+    model, scaler = get_model_and_scaler()
+    
     if not model or not scaler:
         print(" [ERROR] Model not loaded")
-        return jsonify({'error': 'Server warming up, model not ready. Try again.'}), 503
+        return jsonify({'error': 'Model failed to initialize. Check server logs.'}), 500
 
     try:
         req_data = request.get_json(force=True, silent=True)
