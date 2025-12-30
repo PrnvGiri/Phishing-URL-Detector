@@ -110,6 +110,36 @@ def get_domain_info(url):
 
 # --- ROUTES ---
 
+def perform_deep_analysis(url, current_prob=0.0):
+    domain_info = {}
+    dns_info = {}
+    site_data = {}
+    reasons = [] # Extra reasons found during deep scan
+    final_prob = current_prob
+
+    try:
+        domain_info = get_domain_info(url)
+    except Exception as e:
+        print(f" [WARN] Whois failed: {e}")
+
+    try:
+        domain = urlparse(url).netloc
+        dns_info = get_dns_info(domain)
+    except Exception as e:
+        print(f" [WARN] DNS failed: {e}")
+
+    try:
+        site_data = scrape_site_data(url)
+        # If not already confident phishing, check login form
+        # We only penalize if prob is already suspicious (>0.4) to avoid FPs on legit login pages
+        if site_data.get('has_login_form') and final_prob > 0.4:
+            final_prob = max(final_prob, 0.85)
+            reasons.append("Login form detected on suspicious site")
+    except Exception as e:
+        print(f" [WARN] Scraping failed: {e}")
+        
+    return domain_info, dns_info, site_data, final_prob, reasons
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -139,32 +169,36 @@ def predict():
         if not url.startswith(('http://', 'https://')): url = 'http://' + url
         print(f" [INFO] Analyzing: {url}")
         
+        # --- FEATURE EXTRACTION (Need this for chart even for whitelist) ---
+        extractor = FeatureExtractor()
+        features = extractor.extract_features(url)
+        
         # --- PHASE 0: ENTERPRISE VERIFICATION (Whitelist & Typosquatting) ---
         domain = urlparse(url).netloc.lower()
         if domain.startswith('www.'): domain = domain[4:]
         
-        # 1. Whitelist Check (Instant Safe)
+        # 1. Whitelist Check (Instant Safe but with details)
         if domain in TOP_DOMAINS:
             print(f" [INFO] Whitelisted Domain: {domain}")
+            
+            # Perform deep analysis for UI population, but ignore the probability result
+            d_info, dns_info, s_data, _, _ = perform_deep_analysis(url, 0.0)
+            
             return jsonify({
                 'url': url, 'result': 'Legitimate', 'probability': 0.01,
-                'features': {}, 'reasons': ["Verified Safe Domain (Whitelist)"],
-                'domain_info': {}, 'dns_info': {}, 'site_data': {}
+                'features': features, 
+                'reasons': ["Verified Safe Domain (Whitelist)"],
+                'domain_info': d_info, 'dns_info': dns_info, 'site_data': s_data
             })
             
         # 2. Typosquatting Check (Fuzzy match against whitelist)
-        # Check if domain looks like a top domain (e.g. 'faceb00k.com' vs 'facebook.com')
-        # We start with a blank checks list
         typo_reasons = []
         is_typosquat = False
         
-        # Only check against domains that are not sensitive logic roots (like hosting providers)
         if domain not in SENSITIVE_ROOTS:
             for safe_domain in TOP_DOMAINS:
-                # If ratio > 0.85 (very similar) but not identical -> Impersonation
                 ratio = difflib.SequenceMatcher(None, domain, safe_domain).ratio()
                 if 0.80 < ratio < 1.0:
-                    # Double check it's not just a subdomain (e.g. mail.google.com)
                     if not domain.endswith("." + safe_domain):
                         is_typosquat = True
                         typo_reasons.append(f"Impersonation attempt of {safe_domain} ({int(ratio*100)}% match)")
@@ -174,13 +208,11 @@ def predict():
              print(f" [INFO] Typosquatting Detected: {domain}")
              return jsonify({
                 'url': url, 'result': 'Phishing', 'probability': 0.99,
-                'features': {}, 'reasons': typo_reasons + ["Detected via Typosquatting Engine"],
+                'features': features, 'reasons': typo_reasons + ["Detected via Typosquatting Engine"],
                 'domain_info': {}, 'dns_info': {}, 'site_data': {}
             })
 
-        # 1. Feature Extraction (Fast)
-        extractor = FeatureExtractor()
-        features = extractor.extract_features(url)
+        # --- PHASE 1: AI & HEURISTICS ---
         
         # 2. Prediction (Fast)
         feature_names = extractor.get_feature_names()
@@ -192,42 +224,20 @@ def predict():
         # 3. Heuristics (Instant)
         final_prob = model_prob
         reasons = []
-        override = False
         
         susp = features.get('SuspiciousKeywords', 0)
         if susp > 0:
-            override = True; final_prob = max(final_prob, min(0.99, 0.85 + (0.05 * (susp-1)))); reasons.append(f"Detected {susp} suspicious keywords")
+            final_prob = max(final_prob, min(0.99, 0.85 + (0.05 * (susp-1)))); reasons.append(f"Detected {susp} suspicious keywords")
         if features.get('IsDomainIP', 0) == 1:
-            override = True; final_prob = max(final_prob, 0.95); reasons.append("IP Address detected")
+            final_prob = max(final_prob, 0.95); reasons.append("IP Address detected")
         if features.get('IsShortened', 0) == 1:
-            override = True; final_prob = max(final_prob, 0.75); reasons.append("URL Shortener detected")
+            final_prob = max(final_prob, 0.75); reasons.append("URL Shortener detected")
         if features.get('Entropy', 0) > 4.5:
-            override = True; final_prob = max(final_prob, 0.70); reasons.append("High Entropy (Randomness)")
+            final_prob = max(final_prob, 0.70); reasons.append("High Entropy (Randomness)")
 
         # 4. Deep Analysis (Slow - Potentially Failures)
-        # We wrap these to ensure they don't block the main verdict if they crash
-        domain_info = {}
-        dns_info = {}
-        site_data = {}
-        
-        try:
-            domain_info = get_domain_info(url)
-        except Exception as e:
-            print(f" [WARN] Whois failed: {e}")
-
-        try:
-            domain = urlparse(url).netloc
-            dns_info = get_dns_info(domain)
-        except Exception as e:
-            print(f" [WARN] DNS failed: {e}")
-
-        try:
-            site_data = scrape_site_data(url)
-            if site_data.get('has_login_form') and final_prob > 0.4:
-                final_prob = max(final_prob, 0.85); reasons.append("Login form detected")
-        except Exception as e:
-            print(f" [WARN] Scraping failed: {e}")
-
+        domain_info, dns_info, site_data, final_prob, deep_reasons = perform_deep_analysis(url, final_prob)
+        reasons.extend(deep_reasons)
         is_phishing = final_prob > 0.5
         result = "Phishing" if is_phishing else "Legitimate"
         confidence = final_prob if is_phishing else (1 - final_prob)

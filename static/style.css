@@ -108,6 +108,7 @@ body {
 
 .gradient-text {
     background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -154,7 +155,7 @@ body {
     background: transparent;
     border: none;
     color: white;
-    auth-size: 1.1rem;
+    font-size: 1.1rem;
     padding: 12px;
     outline: none;
     font-family: var(--font);
@@ -434,4 +435,96 @@ footer {
     margin-top: 4rem;
     color: var(--text-muted);
     font-size: 0.9rem;
+}
+
+/* --- RESPONSIVE DESIGN --- */
+
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+
+    .flowa-header h1 {
+        font-size: 2.5rem;
+    }
+
+    .verdict-banner {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .verdict-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .confidence-meter {
+        width: 100%;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.3);
+    }
+
+    .intel-grid {
+        grid-template-columns: 1fr;
+        /* Stack cards vertically */
+    }
+}
+
+@media (max-width: 550px) {
+    .flowa-header h1 {
+        font-size: 2rem;
+    }
+
+    .tagline {
+        font-size: 1rem;
+    }
+
+    .search-input-box {
+        flex-direction: column;
+        border-radius: 16px;
+        padding: 12px;
+        background: rgba(15, 23, 42, 0.8);
+    }
+
+    .input-icon {
+        display: none;
+        /* Hide icon for cleaner look */
+    }
+
+    .search-input-box input {
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+        margin-bottom: 8px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .search-input-box input:focus {
+        border-bottom-color: var(--primary);
+    }
+
+    .search-input-box button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .accordion-btn {
+        flex-direction: column;
+        gap: 0.8rem;
+        text-align: center;
+    }
+
+    .btn-content {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .globe-1,
+    .globe-2 {
+        opacity: 0.3;
+        /* Reduce distraction on small screens */
+    }
 }
